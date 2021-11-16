@@ -8,7 +8,6 @@ import Mentorship from './screens/Mentorship'
 import Employment from './screens/Employment'
 import Resources from './screens/Resources'
 import Profile from './screens/Profile'
-import { DrawerLayout } from 'react-native-gesture-handler';
 
 //Comment for git tutorial
 
