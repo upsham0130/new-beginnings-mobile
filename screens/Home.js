@@ -17,11 +17,7 @@ export default function Home({navigation}){
                 height: '100%'
               }}
         />
-        <Text style={{textAlign:"center", fontWeight: 'bold', fontSize: 20, marginTop: '5%', marginBottom: '5%'}}>Welcome to New Beginnings!</Text>
-          <Box color={"#ff8575"} txt="Our mission is to help formerly incarcerated individuals secure employment, establish strong relationships with mentors, and gain access to local resources in order to ease their transition from prison."/>
-          <Box color={"#ff8575"} title="Mentorship" txt="Connect with like-minded people who turned their lives around upon re-entering society. Studies show that people with strong mentors are twice as likely to get employed."/>
-          <Box color={"#ff8575"} title="Employment" txt="Reach out to employers who don’t discriminate based on past convictions (If you’d like to have your business featured please contact us at newbeginnings.innb@gmail.com)."/>
-          <Box color={"#ff8575"} title="Resources" txt="Here you can find a cirrculum to guide your professional development, (as well as other local resources: affordable housing, local support groups, transportation etc.)"/>            
+        <Text style={{textAlign:"center", fontWeight: 'bold', fontSize: 20, marginTop: '5%', marginBottom: '5%'}}>Welcome to New Beginnings!</Text>          
         </ScrollView>
         </View>
       )
