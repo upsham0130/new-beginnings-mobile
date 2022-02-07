@@ -9,6 +9,7 @@ export default function Box(props){
             borderRadius: 10,
             marginLeft: '5%',
             marginRight: '5%',
+            marginTop: '5%',
             marginBottom: '5%'
         }}>
             {
