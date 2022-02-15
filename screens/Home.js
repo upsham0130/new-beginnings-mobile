@@ -21,18 +21,11 @@ export default function Home({navigation}){
       // Signed in 
       alert("Sign up successful")
       const user = userCredential.user;
-      //Write to database the "name" and "location" variables
-      //https://firebase.google.com/docs/database/web/start
-      //https://firebase.google.com/docs/database/web/read-and-write#write_data
-      /*
-        For now, let's write to:
-        user {
-          user's unique id (is a variable stored in user.uid){
+        set(ref(user), {
             name: name,
             location: location
           }
         }
-      */
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -42,10 +35,16 @@ export default function Home({navigation}){
   }
 
   const loginUser= ()=>{
-    //Login in the user with login function
-    //https://firebase.google.com/docs/auth/web/password-auth#sign_in_a_user_with_an_email_address_and_password
-    /*Don't worry about doing anything after the login for now. In other words, the screen won't change after they log in. Might be worth adding
-    an alert on success for now though so we know it's working.*/
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      alert("Login successful")
+      const user = userCredential.user;
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
   }
 
     return (
