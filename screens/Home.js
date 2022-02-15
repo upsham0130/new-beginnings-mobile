@@ -23,11 +23,11 @@ export default function Home({navigation}){
       // Signed in 
       alert("Sign up successful")
       const user = userCredential.user;
-        set(ref(db, 'users/'+user.id), {
-            name: name,
-            location: location
-          }
-        )
+      set(ref(db, 'users/'+user.uid), {
+          name: name,
+          location: location
+        }
+      )
     })
     .catch((error) => {
       const errorCode = error.code;
