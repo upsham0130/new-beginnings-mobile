@@ -3,9 +3,11 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, Dimensions} from '
 import Box from '../components/Box'
 import { LinearGradient } from 'expo-linear-gradient';
 import { firebase } from '../firebase'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 
 const auth = getAuth(firebase)
+const db = getDatabase(firebase)
 
 export default function Home({navigation}){
   //State 0 is log in, 1 is sign up
@@ -21,16 +23,17 @@ export default function Home({navigation}){
       // Signed in 
       alert("Sign up successful")
       const user = userCredential.user;
-        set(ref(user), {
+        set(ref(db, 'users/'+user.id), {
             name: name,
             location: location
           }
-        }
+        )
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage)
+      alert(errorMessage)
     });
   }
 
@@ -76,8 +79,8 @@ export default function Home({navigation}){
         <View>
           <TextInput style={styles.input} placeholder="Name" onChangeText={setName} value={name}/>  
           <TextInput style={styles.input} placeholder="Location" onChangeText={setLocation} value={location}/>  
-          <TouchableOpacity style={styles.button}>
-            <Text style={{color: 'white'}} onPress={signUpUser}>Sign Up</Text>
+          <TouchableOpacity style={styles.button} onPress={signUpUser}>
+            <Text style={{color: 'white'}}>Sign Up</Text>
           </TouchableOpacity>
           <Text style={{marginTop: '5%', marginLeft: '5%',  marginRight: '5%'}}>Already have an account? <Text onPress={()=> setLoginState(0)} style = {{ color: 'blue' }}>Log In</Text></Text>
         </View>
