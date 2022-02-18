@@ -1,24 +1,47 @@
 import * as React from 'react';
 import { View, ScrollView, Text} from 'react-native';
-import Box from '../components/Box'
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from "expo-linear-gradient";
+import { useState, useEffect } from "react";
+import { Box, FlatList, Center, NativeBaseProvider } from "native-base";
 
 export default function Resources({navigation}){
-    return (
-      <ScrollView>     
-      <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'orange'}}>
-      <LinearGradient
-        colors={['rgba(255,255,255,0.9)', 'transparent']}
-        style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            top: 0,
-            height: '100%'
-          }}
-      />
-        <Text style={{textAlign:"center", fontWeight: 'bold', fontSize: 20, marginTop: '5%', marginBottom: '5%'}}>Welcome to New Beginnings!</Text>  
-      </View>
-    </ScrollView>
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchData = async () => {
+      const resp = await fetch("https://apis.yinftw.com/nb/resources/food");
+      const data = await resp.json();
+      setData(data);
+      setLoading(false);
+    };
+
+    const renderItem = ({ item }) => {
+      return (
+        <Box px={5} py={2} rounded="md" bg="primary.800" my={2}>
+          {item.Name}
+        </Box>
       )
+    };
+
+    useEffect(() => {
+      fetchData();
+    }, []);
+
+    return(
+      <ScrollView>
+        <NativeBaseProvider>
+          <Center flex={1}>
+          {loading && <Box>Loading..</Box>}
+          <Box>Using Fetch API</Box>
+          {data && (
+            <FlatList
+              data={data}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.Address}
+            />
+          )}
+          </Center>
+        </NativeBaseProvider>
+      </ScrollView>
+    )
 }
